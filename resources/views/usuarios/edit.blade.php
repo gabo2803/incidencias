@@ -4,7 +4,7 @@
 
 
 Lorem ipsum dolor, sit amet consectetur adipisicing elit. In, aut voluptate? Ex, officia amet? Dolor dicta amet, sint molestias, rem aut laudantium eligendi nulla nisi illum numquam, fugit sit unde!
-
+<form action="" method="post"></form>
 @stop
 @section('css')
  
