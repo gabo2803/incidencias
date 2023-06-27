@@ -17,16 +17,12 @@ return new class extends Migration
             $table->string('primerNombre');
             $table->string('segundoNombre')->nullable();
             $table->string('primerApellido');
-            $table->string('segundoApellido')->nullable();
-            $table->string('username');
+            $table->string('segundoApellido')->nullable();           
             $table->string('password');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->enum('rol', ['Administrador','Usuario'])->default('Usuario');
-
+            $table->timestamp('email_verified_at')->nullable();          
             $table->unsignedBigInteger('idCargo');            
-            $table->foreign('idCargo')->references('id')->on('cargos');
-            
+            $table->foreign('idCargo')->references('id')->on('cargos');            
             $table->enum('activo', ['Si','No']);
             $table->enum('sexo', ['Masculino','Femenino']);
             $table->rememberToken();

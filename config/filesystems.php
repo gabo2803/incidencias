@@ -1,5 +1,10 @@
 <?php
 
+use League\Flysystem\Filesystem;
+use League\Flysystem\Smb\SmbAdapter;
+
+
+
 return [
 
     /*
@@ -27,19 +32,30 @@ return [
     | Supported Drivers: "local", "ftp", "sftp", "s3"
     |
     */
+    
 
     'disks' => [
 
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
-            'throw' => false,
+            'throw' => true,
+        ],
+
+        'ftp' => [
+
+            'driver' => 'ftp', // o 'nfs' según el protocolo de tu FTP
+            'host' => env('FTP_HOST'), // Dirección IP de la FTP
+            'username' => env('FTP_USERNAME'), // Usuario para acceder a la FTP
+            'password' => env('FTP_PASSWORD'), // Contraseña del usuario
+            'root' => '/ANEXOS_PRUEBA', // Directorio compartido en la FTP
+
         ],
 
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],

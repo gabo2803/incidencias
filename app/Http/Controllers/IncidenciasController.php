@@ -14,7 +14,15 @@ use DB;
 
 
 class IncidenciasController extends Controller
-{
+{   
+    
+    function __construct()
+    {
+        $this->middleware('permission:incidencias-list|incidencias-create|incidencias-edit|incidencias-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:incidencias-create', ['only' => ['create','store']]);
+        $this->middleware('permission:incidencias-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:incidencias-delete', ['only' => ['destroy']]);
+   }
     /**
      * Display a listing of the resource.
      *

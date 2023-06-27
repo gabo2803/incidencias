@@ -21,7 +21,7 @@ class Equipos extends Model
         'modelo',
         'garantia',
         'servitag',
-        'idProveedor',
+        'idProvedor',
         'tipoActivo',
         'fechaVencGar',
         'idSuperCategoria',
@@ -45,16 +45,16 @@ class Equipos extends Model
 
     public function incidencias()
     {
-        return $this->hasMany('App\Models\Incidencia', 'idEquipo', 'id');
+        return $this->hasMany('App\Models\Incidencias', 'idEquipo', 'id');
     }
 
     public function supers()
     {
-        return $this->belongsTo('App\Models\Super', 'idSuperCategoria', 'id');
+        return $this->belongsTo('App\Models\Supers', 'idSuperCategoria', 'id');
     }
-    public function proveedores()
+    public function provedores()
     {
-        return $this->belongsTo('App\Models\Proveedores', 'idProveedor', 'id');
+        return $this->belongsTo('App\Models\Provedores', 'idProvedor', 'id');
     }
 
     public function area()

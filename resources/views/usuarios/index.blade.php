@@ -9,7 +9,7 @@
                     <h2>Lista de Usuarios</h2>
                 </div>
                 <div class="pull-right mb-2">
-                    <a class="btn btn-success" href="{{ route('usuarios.create') }}"> Crear usuarios</a>
+                    <a class="btn btn-success" href="{{ route('usuarios.create') }}"> Nuevo  usuario</a>
                 </div>
             </div>
         </div>
@@ -43,13 +43,17 @@
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                     <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
                                     <a class="btn btn-small btn-success"
-                                        href="{{ URL::to('usuarios/' . $usuario->id) }}">Show</a>
+                                        href="{{ URL::to('usuarios',$usuario->id) }}">Show</a>
 
                                     <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                     <a class="btn btn-small btn-info"
-                                        href="{{ URL::to('usuarios/' . $usuario->id . '/edit') }}">Edit</a>
-                                    <a class="btn btn-small btn-danger"
-                                        href="{{ URL::to('usuarios/' . $usuario->id . '/destroy') }}">Delete</a>
+                                        href="{{route('usuarios.edit',$usuario->id) }}">Edit</a>
+                                     <form action="{{ route('usuarios.destroy',$usuario->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-small btn-danger" >Delete</button>
+                                    </form>   
+                                    
                                 </div>
 
 

@@ -5,10 +5,12 @@
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
-                    <h2>Modulo de incidencias</h2>
+                    <h2>Lista de Incidencias</h2>
                 </div>
                 <div class="pull-right mb-2">
-                    <a class="btn btn-success" href="{{ route('incidencias.create') }}"> Crear Incidencia</a>
+                    @can('incidencias-create')
+                    <a class="btn btn-success" href="{{ route('incidencias.create') }}"> Nueva Incidencia</a>
+                    @endcan
                 </div>
             </div>
         </div>
@@ -39,21 +41,29 @@
                             <td>{{ $incidencia->titulo }}</td>
                             <td>{{ $incidencia->equipo->descripcion }}</td>
                             <td>{{ $incidencia->user->primerNombre }}</td>
-                            <td>{{ $incidencia->id }}</td>
+                            <td>{{ $incidencia->idAsignadoA}}</td>
                             <td>{{ $incidencia->estado->descripcion }}</td>
                             <td>{{ $incidencia->prioridad }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                     <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
                                     <a class="btn btn-small btn-success"
-                                        href="{{ URL::to('incidencias/' . $incidencia->id) }}">Show</a>
+                                        href="{{ route('incidencias.show',$incidencia->id) }}">Show</a>
 
                                     <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
+                                    @can('incidencias-edit')
                                     <a class="btn btn-small btn-info"
-                                        href="{{ URL::to('incidencias/' . $incidencia->id . '/edit') }}">Edit</a>
+                                        href="{{ route('incidencias.edit',$incidencia->id)}}">Edit</a>
+                                    @endcan    
+                                    @can('incidencias-delete')  
+                                    <form action="{{ route('incidencias.destroy',$incidencia->id) }}" method="post">
+                                    @csrf
+                                    @method('DELETE') 
+                                    <button type="submit" class="btn btn-small btn-danger">delete</button>
+                                    </form> 
+                                    @endcan             
                                 </div>
-
-                                </th>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

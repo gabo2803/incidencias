@@ -18,6 +18,6 @@ class Provedores extends Model
         ];
 
         public function equipos(){
-            return $this->hasMany('App\Equipo', 'idProveedores', 'id');
+            return $this->hasMany('App\Models\Equipos', 'idProvedor', 'id');
         }
 }

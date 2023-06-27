@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('supers', function (Blueprint $table) {
+        Schema::create('archivos', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('idEquipo')->unsigned();
             $table->string('nombre');
-            $table->unsignedBigInteger('responsable')->nullable();
-            $table->foreign('responsable')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('idEquipo')->references('id')->on('equipos')->onDelete('cascade');  //llave foranea
+            $table->string('ruta',150);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('supers');
+        Schema::dropIfExists('archivos');
     }
 };

@@ -26,8 +26,7 @@ class User extends Authenticatable
         'segundoApellido',
         'username', 
         'password',
-        'email',
-        'rol',
+        'email',        
         'idCargo',
         'activo',
         'sexo',       
@@ -70,7 +69,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Models\Equipos', 'userequipos', 'idUser', 'idEquipo');
     }
     public function supers(){
-        return $this->hasMany('App\Models\Super', 'responsable','id');
+        return $this->hasMany('App\Models\Supers', 'responsable','id');
     }
 
 

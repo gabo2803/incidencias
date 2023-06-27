@@ -44,7 +44,7 @@ class Incidencias extends Model
     {
         return $this->belongsTo('App\Models\User', 'idAsignadoA', 'id');
     }
-
+    
     public function estado()
     {
         return $this->belongsTo('App\Models\Estados', 'idEstado', 'id');

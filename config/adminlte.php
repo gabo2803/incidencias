@@ -321,13 +321,20 @@ return [
         [
             'text' => 'Incidencia',
             'url'  => 'incidencias',
-            'icon' => 'fas fa-fw fa-wrench',
+            'icon' => 'fab fa-fw fa-buffer',
+        ],
+        
+        [
+            'text' => 'Equipos',
+            'url'  => 'equipos',
+            'icon' => 'fas fa-fw fa-tv',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Lista de Roles',
+            'url'  => 'roles',
+            'icon' => 'fas fa-fw fa-user-cog',
         ],
+
         [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
@@ -450,12 +457,12 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

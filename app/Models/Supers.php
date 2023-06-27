@@ -16,12 +16,12 @@ class Supers extends Model
     ];
 
     public function equipos(){
-    	return $this->hasMany('App\Equipo', 'idSuperCategoria','id');
+    	return $this->hasMany('App\Models\Equipo', 'idSuperCategoria','id');
     }
     public function notificacions(){
-        return $this->hasMany('App\Notificacion', 'responsable','id');
+        return $this->hasMany('App\Models\Notificacion', 'responsable','id');
     }
     public function users(){
-        return $this->belongsTo('App\User', 'responsable','id');
+        return $this->belongsTo('App\Models\User', 'responsable','id');
     }
 }
