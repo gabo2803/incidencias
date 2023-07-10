@@ -383,47 +383,55 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/../css/style.css">
 @stop
 
 @section('js')
-    <script>
-        $(document).ready(function() {
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+<script>
+    
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#eliminar').click(function(event) {
+            event.preventDefault();
+            var userURL = $(this).attr('href');
+            console.log(userURL);
+            Swal.fire({
+                title: 'Confirmar eliminación',
+                text: '¿Estás seguro de que quieres eliminar a este usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Eliminar',
+                cancelButtonText: 'Cancelar',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: userURL,
+                        method: 'DELETE',
+                        dataType: 'json',
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Eliminado',
+                                text: response.mensaje,
+                                icon: 'success'
+                            }).then(() => {
+                                // Puedes redirigir a otra página o realizar cualquier acción adicional después de eliminar el archivo
+                                location.reload();
+                            });                            
+                        },
+                        error: function(response) {
+                            alert('Error: ' + response.statusText);
+                        }
+                    });
                 }
             });
-
-            $('#eliminar').click(function(event) {
-                event.preventDefault();
-                
-                Swal.fire({
-                    title: '¿Estás seguro?',
-                    text: 'Esta acción eliminará el archivo permanentemente.',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Eliminar',
-                    cancelButtonText: 'Cancelar',
-                    reverseButtons: true
-                }).then((result) => {
-                    
-                    if (result.isConfirmed) {
-                        // Aquí puedes llamar a la función para eliminar el archivo
-
-                        alert(result.isConfirmed)
-
-
-                    } else {
-                        // Aquí puedes manejar la situación en la que se cancela la eliminación del archivo
-                        // Por ejemplo, puedes mostrar un mensaje o realizar alguna otra acción
-                        console.log('Se canceló la eliminación del archivo');
-                    }
-                });
-
-            });
-
         });
-    </script>
+    });
+    
+</script>
+
 @stop

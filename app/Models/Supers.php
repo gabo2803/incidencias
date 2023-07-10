@@ -16,7 +16,7 @@ class Supers extends Model
     ];
 
     public function equipos(){
-    	return $this->hasMany('App\Models\Equipo', 'idSuperCategoria','id');
+    	return $this->hasMany('App\Models\Equipos', 'idSuperCategoria','id');
     }
     public function notificacions(){
         return $this->hasMany('App\Models\Notificacion', 'responsable','id');

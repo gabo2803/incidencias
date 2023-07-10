@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\IncidenciasController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,31 +46,38 @@ class User extends Authenticatable
 
     public function incidencias()
     {
-        return $this->hasMany('App\Models\Incidencias', 'idUser', 'id');
+        return $this->hasMany(Incidencias::class,'idUser');
     }
     
-    public function Notificacions(){
-        return $this->hasMany('App\Models\Notificacion', 'reporto', 'id');    
+    public function Notificacions()
+    {
+        return $this->hasMany(Notificacion::class,'reporto');    
     }
        
 
-    public function incidenciasAsignadas(){
-        return $this->hasMany('App\Models\Incidencias', 'idAsignadoPor', 'id');
+    public function incidenciasAsignadas()
+    {
+        return $this->hasMany(Incidencias::class,'idAsignadoPor');
     }
 
-    public function incidenciasRecibidas(){
-        return $this->hasMany('App\Models\Incidencias', 'idAsignadoA', 'id');
+    public function incidenciasRecibidas()
+    {
+        return $this->hasMany(Incidencias::class,'idAsignadoA');
     }
 
-    public function cargo(){
-        return $this->belongsTo('App\Models\Cargos', 'idCargo', 'id');
+    public function cargo()
+    {
+        return $this->belongsTo(Cargos::class,'idCargo');
     }
 
-    public function equipos(){
-        return $this->belongsToMany('App\Models\Equipos', 'userequipos', 'idUser', 'idEquipo');
+    public function equipos()
+    {
+        return $this->belongsToMany(Equipos::class,'userequipos', 'idUser', 'idEquipo');
     }
-    public function supers(){
-        return $this->hasMany('App\Models\Supers', 'responsable','id');
+
+    public function supers()
+    {
+        return $this->hasMany(Supers::class,'responsable');
     }
 
 

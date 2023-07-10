@@ -27,35 +27,36 @@ class Incidencias extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\Models\User', 'idUser', 'id');
+        return $this->belongsTo(User::class,'idUser');
     }
 
     public function equipo()
     {
-        return $this->belongsTo('App\Models\Equipos', 'idEquipo', 'id');
+        return $this->belongsTo(Equipos::class,'idEquipo');
     }
 
     public function asignadoPor()
     {
-        return $this->belongsTo('App\Models\User', 'idAsignadoPor', 'id');
+        return $this->belongsTo(User::class,'idAsignadoPor');
     }
 
     public function asignadoA()
     {
-        return $this->belongsTo('App\Models\User', 'idAsignadoA', 'id');
+        return $this->belongsTo(User::class,'idAsignadoA');
     }
     
     public function estado()
     {
-        return $this->belongsTo('App\Models\Estados', 'idEstado', 'id');
+        return $this->belongsTo(Estados::class,'idEstado');
     }
 
     public function tipoIncidencia()
     {
-        return $this->belongsTo('App\Models\Tipos', 'idTipoIncidencia', 'id');
+        return $this->belongsTo(Tipos::class,'idTipoIncidencia');
     }
+    
     public function notificaciones()
     {
-        return $this->hasOne('App\Models\Notificacion', 'idIncidencia', 'id');
+        return $this->hasOne(Notificacion::class,'idIncidencia');
     }
 }

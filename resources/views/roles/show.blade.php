@@ -1,18 +1,18 @@
 @extends('adminlte::page')
-@section('title', 'Ver rol')
+@section('title', 'Mostar Roles')
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left mb-2">
+            <div class="col-lg-12 ">
+                <div class="float-left m-2">
                     <h2>Detalles de rol</h2>
                 </div>
-                <div class="pull-right mb-2">
+                <div class="float-right m-2">
                     <a class="btn btn-primary" href="{{ route('roles.index') }}"> Atras</a>
                 </div>
             </div>
         </div>
-        <div class="card">
+        <div class="card card-default">
             <h5 class="card-header">Tipo de Rol: {{$role->name}}</h5>
             <div class="card-body" style="width: 600px">
                 <ul class="list-group">
@@ -26,7 +26,7 @@
 
 @stop
 @section('css')
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/../css/style.css">
 @stop
 @section('js')
     <script>

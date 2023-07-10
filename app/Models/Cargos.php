@@ -19,6 +19,6 @@ class Cargos extends Model
     }
 
     public function area(){
-	   	return $this->belongsTo('App\Models\Area', 'idArea', 'id');
+	   	return $this->belongsTo('App\Models\Areas', 'idArea', 'id');
     }
 }

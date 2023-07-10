@@ -6,23 +6,26 @@ use App\Models\Equipos;
 use App\Models\Incidencias;
 use App\Models\Tipos;
 use App\Models\Estados;
+use App\Models\Notificacion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Validated;
 use Datatables;
 use DB;
-
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\otra;
+use Illuminate\Support\Facades\Auth;
 
 class IncidenciasController extends Controller
-{   
-    
+{
+
     function __construct()
     {
-        $this->middleware('permission:incidencias-list|incidencias-create|incidencias-edit|incidencias-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:incidencias-create', ['only' => ['create','store']]);
-        $this->middleware('permission:incidencias-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:incidencias-list|incidencias-create|incidencias-edit|incidencias-delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:incidencias-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:incidencias-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:incidencias-delete', ['only' => ['destroy']]);
-   }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +33,7 @@ class IncidenciasController extends Controller
      */
     public function index()
     {
-       
+
         $incidencias = Incidencias::all();
 
         return view('incidencias.index', compact('incidencias'));
@@ -42,11 +45,11 @@ class IncidenciasController extends Controller
      */
     public function create()
     {
-        $users = User::where('rol','=','Administrador')->get();
+        $users = User::all();
         $tipos = Tipos::all();
         $equipos = Equipos::all();
         $estados = Estados::all();
-        return view('incidencias.create',compact('tipos','equipos','estados','users'));
+        return view('incidencias.create', compact('tipos', 'equipos', 'estados', 'users'));
     }
     /**
      * Store a newly created resource in storage.
@@ -54,23 +57,37 @@ class IncidenciasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
         $request->validate([
             'idUser' => 'required',
             'idEquipo' => 'required',
-            'idTipoIncidencia' => 'required',
+            'idTipoIncidencia' ,
             'prioridad' => 'required',
-            'idEstado' => 'required',
-            'titulo' => 'required',  
-            'idAsignadoPor' => 'required',        
-            'fechaLimite' => 'required',
-            'idAsignadoA' =>'required',
-            'descripcion' =>'required',
-            'observacion' =>'required'
-            
+            'idEstado' ,
+            'titulo' => 'required',
+            'idAsignadoPor' => 'required',
+            'fechaLimite',
+            'idAsignadoA',
+            'descripcion' => 'required',
+            'observacion' ,
+            'comentarioSolucion'
+
         ]);
-        Incidencias::create($request->all());
+        $incidencia = Incidencias::create($request->all());
+        $equipo = Equipos::find($request->idEquipo);
+        $notificacion = new Notificacion();
+        $notificacion->reporto = $incidencia->idUser;
+        $notificacion->activo = $incidencia->idEquipo;
+        $notificacion->idIncidencia = $incidencia->id;
+        $notificacion->responsable = $equipo->supers->id;
+        $notificacion->save();
+        $email = $notificacion->supers->users->email;
+        //dd($email);
+        $var =  Notification::route('mail', $email)->notify(new otra($incidencia));
+        //dd($var);
+
         return redirect()->route('incidencias.index')
             ->with('success', 'incidencia has been created successfully.');
     }
@@ -80,9 +97,10 @@ class IncidenciasController extends Controller
      * @param  \App\company  $company
      * @return \Illuminate\Http\Response
      */
+
     public function show(Incidencias $incidencia)
     {
-      
+
         return view('incidencias.show', compact('incidencia'));
     }
     /**
@@ -97,10 +115,10 @@ class IncidenciasController extends Controller
         $tipos = Tipos::all();
         $equipos = Equipos::all();
         $estados = Estados::all();
-        $users = User::where('rol','=','Administrador')->get();
-        
-        
-        return view('incidencias.edit', compact('incidencia','tipos','equipos','estados','users'));
+        $users = User::all();
+
+
+        return view('incidencias.edit', compact('incidencia', 'tipos', 'equipos', 'estados', 'users'));
     }
     /**
      * Update the specified resource in storage.
@@ -111,24 +129,53 @@ class IncidenciasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $idAsignadoAnterior = Incidencias::find($id)->idAsignadoA;
+        // dd($request->observacion);
         $request->validate([
             'idUser' => 'required',
             'idEquipo' => 'required',
             'idTipoIncidencia' => 'required',
             'prioridad' => 'required',
-            'idEstado' => 'required',
-            'titulo' => 'required',  
-            'idAsignadoPor' => 'required',        
-            'fechaLimite' => 'required',
-            'idAsignadoA' =>'required',
-            'descripcion' =>'required',
-            'observacion' =>'required'
+            'idEstado',
+            'titulo' => 'required|string',
+            'idAsignadoPor',
+            'fechaLimite',
+            'idAsignadoA',
+            'descripcion' => 'required|string',
+            'observacion'
         ]);
-        $incidencias = Incidencias::find($id);
-        $incidencias->name = $request->name;
-        $incidencias->email = $request->email;
-        $incidencias->address = $request->address;
-        $incidencias->save();
+        if ($request->idAsignadoA && $request->idEstado == 1) {
+            $request['idEstado'] = 5;
+        } elseif ($request->idAsignadoA == null) {
+            $request['idEstado'] = 1;
+        }
+
+        $comentarioSolucion = Incidencias::find($id)->comentarioSolucion;
+
+        $incidencia = Incidencias::find($id)->update($request->all());
+
+        if ($request['comentarioSolucion'] == '') {
+            Incidencias::find($id)->update([
+                'comentarioSolucion' => $comentarioSolucion,
+                'idAsignadoPor' => Auth::user()->id
+            ]);
+        } else {
+            $fecha = strftime("%d/%m/%Y a las %H:%M", time());
+            $comentarioSolucionNuevo = $request['comentarioSolucion'] . " - Comentario de solucion realizada por: " . Auth::user()->primerNombre . " el " . $fecha . ".";
+            Incidencias::find($id)->update([
+                'comentarioSolucion' => $comentarioSolucion . "\n" . $comentarioSolucionNuevo,
+                'idAsignadoPor' => Auth::user()->id
+            ]);
+        }
+        $incidencia = Incidencias::find($id);
+        $users = User::where('id', $incidencia->idAsignadoA)->first();
+       
+        if ($request->idAsignadoA !=  $idAsignadoAnterior && $request->idAsignadoA != Auth::user()->id) {
+
+            dd( $users->email);//Notification::route('mail',$users->email)->notify(new IncidenciasAsignadas($incidencia));
+
+        }
+
         return redirect()->route('incidencias.index')
             ->with('success', 'incidencias Has Been updated successfully');
     }

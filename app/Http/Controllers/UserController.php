@@ -57,7 +57,7 @@ class UserController extends Controller
         $user = User::create($input);
 
 
-        if (($input['responsable'])!= "Otro")
+        if (!($input['responsable']))
         {
             $superuser = Supers::find($input['responsable']);
             $superuser->responsable = $user->id;  
@@ -86,7 +86,8 @@ class UserController extends Controller
     {
         $usuario = User::find($id);
         $roles = Role::pluck('name', 'name')->all();        
-        $userroles = $usuario->roles->pluck('name','name')->all();      
+        $userroles = $usuario->roles->pluck('name')->all();  
+        //dd($userroles);
         $cargos = Cargos::orderBy('descripcion','ASC')->get(); 
         $responsable = Supers::where('responsable',$id)->first();
         //dd($userroles);
@@ -135,7 +136,8 @@ class UserController extends Controller
         $responsable = Supers::where('responsable',$id)->first();
         //dd($responsable);
         if($responsable){
-            $responsable->responsable= NUll;
+            return redirect()->route('usuarios.index')
+            ->with('success', 'No se puede eliminar es responsable de area');
         }
         User::find($id)->delete();     
 

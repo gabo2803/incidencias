@@ -1,14 +1,14 @@
 @extends('adminlte::page')
-@section('title', 'Crear usuario')
+@section('title', 'Crear Usuario')
 @section('content')
 
-    <div class="contaner mt2">
+    <div class="contaner mt-2">
         <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="pull-left">
+            <div class="col-lg-12">
+                <div class="float-left  m-2">
                     <h2>Crear Nuevo Usuario</h2>
                 </div>
-                <div class="pull-right mb-2">
+                <div class="float-right m-2">
                     <a class="btn btn-primary" href="{{ route('usuarios.index') }}">Atras</a>
                 </div>
             </div>
@@ -21,6 +21,9 @@
         <form action="{{ route('usuarios.store') }}" method="post" enctype="multipart/form-data">
               @csrf
             <div class="card card-default mt-2">
+                <div class="card-header">
+                    <h3 class="card-title">Datos del Usuario</h3>
+                </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -54,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Segundo Apellido:</label>
-                                <input type="text" name="SegundoApellido" class="form-control"
+                                <input type="text" name="segundoApellido" class="form-control"
                                     placeholder="Segundo Apellido">                               
                             </div>
                         </div>
@@ -111,6 +114,7 @@
                                 <select name="responsable" id="responsable" class="form-control select2 select2-hidden-accessible" style="width: 100%;"
                                 data-select2-id="1" tabindex="-1" aria-hidden="true">
                                 <option value="" title="Seleccione sexo">Seleccione una Categoria</option>
+                                <option value="null">No es responsable de area</option>
                                 @foreach ($supers as $super)
                                     <option value="{{ $super->nombre}}">{{ $super->nombre}}</option>
                                 @endforeach                                                             
@@ -157,7 +161,7 @@
     </div>
 @stop
 @section('css')
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/../css/style.css">
 @stop
 @section('js')
     <script>

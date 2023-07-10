@@ -20,19 +20,19 @@ class Notificacion extends Model
 
     public function users()
     {
-        return $this->belongsTo('App\User', 'reporto', 'id');
+        return $this->belongsTo('App\Models\User', 'reporto', 'id');
     }
     public function supers()
     {
-        return $this->belongsTo('App\Super', 'responsable', 'id');
+        return $this->belongsTo('App\Models\Supers', 'responsable', 'id');
     }
 
     public function equipos()
     {
-        return $this->belongsTo('App\Equipo', 'activo', 'id');
+        return $this->belongsTo('App\Models\Equipos', 'activo', 'id');
     }
     public function incidencias()
     {
-        return $this->belongsTo('App\Incidencia', 'idIncidencia', 'id');
+        return $this->belongsTo('App\Models\Incidencias', 'idIncidencia', 'id');
     }
 }

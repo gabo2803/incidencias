@@ -4,10 +4,7 @@
 
     <div class="container mt-2">
         <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="float-left">
-                    <h2>Listado de equipos</h2>
-                </div>
+            <div class="col-lg-12 margin-tb">                
                 <div class="float-right mt-2 mb-2">
                     @can('equipo-create')
                         <a class="btn btn-success" href="{{ route('equipos.create') }}"> Nuevo equipo</a>
@@ -24,7 +21,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-head">
-                        <h5 class="pull-left ml-3 mt-2">Total Equipos {{ $nequipos }}</h5>
+                        <h4 class="pull-left ml-3 mt-2">Total Equipos {{ $nequipos }}</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" id="myTable">
@@ -56,7 +53,7 @@
                                                     <a class="btn btn-small btn-info" href="{{route('equipos.edit',$equipo->id)}}">Edit</a>
                                                 @endcan
                                                 @can('equipo-delete')
-                                                    <form action="#" method="post">
+                                                    <form action="{{route('equipos.destroy',$equipo->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-small btn-danger">delete</button>

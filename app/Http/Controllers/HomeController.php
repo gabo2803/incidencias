@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Equipos;
+use App\Models\Incidencias;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,32 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
-    }
-
-    public function subirArchivo()
-    {
-        if($request->hasFile('file'))
-        {
-            foreach($request->file('file') as $file)
-            {
-                $validation = $request->validate([
-                    'file.*' => 'required|file|mimetypes:pdf,docx|max:2048000'
-                ]);
-                   
-                   $archivo=$validation['file'];
-                   $archivo= new Archivo();
-                   $archivo->idEquipo=$equipo->id;
-                   $carpeta=$equipo->id;
-                   $nombre=$file->getClientOriginalName();
-                   $archivo->nombre = pathinfo($nombre,PATHINFO_FILENAME);
-                   $ruta=$carpeta."/".$file->getClientOriginalName();
-                   $contenidoArchivo = file_get_contents($file);
-                   Storage::disk('local')->put($ruta,  $contenidoArchivo );
-                   $archivo->ruta=$ruta;
-                   $archivo->save();
-           
-            }
-        }
+        $usuario = Auth::user();
+        $monthlySales = Incidencias::selectRaw('DATE_FORMAT(created_at, "%Y-%m") AS month, COUNT(*) AS total')
+            ->groupBy('month')
+            ->orderBy('month')
+            ->pluck('total', 'month')
+            ->toArray();
+        $cantidadIncidencias = Incidencias::count();
+        $incidenciasActivas = Incidencias::where('idEstado',5)
+                                            ->where('idAsignadoA',$usuario->id)
+                                            ->count();
+        //dd($incidenciasActivas, $usuario->id);
+        $cantidadUser = User::count();
+        $cantidadEquipos = Equipos::count();
+       
+        return view('home', compact('usuario', 'monthlySales', 'cantidadIncidencias' ,'cantidadUser','cantidadEquipos','incidenciasActivas'));
     }
 }

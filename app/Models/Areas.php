@@ -15,10 +15,10 @@ class Areas extends Model
     ];
 
     public function equipos(){
-    	return $this->hasMany('App\Models\Equipo', 'idArea', 'id');
+    	return $this->hasMany('App\Models\Equipos', 'idArea', 'id');
     }
 
     public function cargos(){
-    	return $this->hasMany('App\MOdels\Cargo', 'idArea', 'id');
+    	return $this->hasMany('App\Models\Cargos', 'idArea', 'id');
     }
 }

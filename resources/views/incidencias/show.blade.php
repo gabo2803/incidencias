@@ -1,19 +1,21 @@
 @extends('adminlte::page')
-@section('title', 'Home')
+@section('title', 'Incidencias Show')
 @section('content')
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left mb-2">
+            <div class="float-left mt-2">
                 <h2>Detalles incidencia</h2>
             </div>
-            <div class="pull-right mb-2">
+            <div class="float-right mt-2">
                 <a class="btn btn-primary" href="{{ route('incidencias.index') }}"> Atras</a>
             </div>
         </div>
     </div>
     <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Datos de la incidencia</h3>
+        </div>
         <div class="card-body">           
             <table class="table table-striped ">
                 <tbody>
@@ -84,7 +86,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/../css/style.css">
 @stop
 
 @section('js')

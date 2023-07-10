@@ -32,6 +32,9 @@
                                 <input type="text" name="serial" class="form-control"
                                     placeholder="Serial del Equipo" autofocus>                                
                             </div>
+                            @error('serial')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -66,20 +69,28 @@
                             <div class="form-group">
                                 <label>Descripcion o Nombre:</label>
                                 <input type="text" name="descripcion" class="form-control"
-                                    placeholder="Descripcion o Nombre del Equipo">                                
+                                    placeholder="Descripcion o Nombre del Equipo">  
+                                    @error('descripcion')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror                                 
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <div class="form-group">
                             <label>Proveedor:</label>
                                 <select name="idProvedor" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Proveedor del equipo">
+                                    <option selected="selected" data-select2-id="3" title="Proveedor del equipo"  value="">
                                         Seleccione proveedor del equipo</option>
                                     @foreach ($proveedores as $proveedor)
                                         <option value="{{ $proveedor->id }}">
                                             {{$proveedor->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @error('idProvedor')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                 @enderror
+                            </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
@@ -119,13 +130,16 @@
                                 <label>Categoria:</label>
                                 <select name="idSuperCategoria" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Categoria del equipo">
+                                    <option selected="selected" data-select2-id="3" title="Categoria del equipo"  value="">
                                        Seleccione Categoria del Equipo</option>
                                     @foreach ($categorias as $categoria)
                                         <option value="{{ $categoria->id }}">
                                             {{$categoria->nombre }}</option>
                                     @endforeach
                                 </select>
+                                @error('idSuperCategoria')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror                                
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -133,7 +147,7 @@
                                 <label>Area:</label>
                                 <select name="idArea" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Area del equipo">
+                                    <option selected="selected" data-select2-id="3" title="Area del equipo"  value="">
                                         Seleccione Area del equipo</option>
                                     <option value="">-----------piso 1-----------</option>    
                                     @foreach ($areas as $area)
@@ -198,8 +212,10 @@
                                             {{ $area->description }}</option>
                                             @endif 
                                     @endforeach
-
-                                </select>                              
+                                </select>
+                                @error('idArea')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror                              
                             </div>
                         </div>
                     </div>                    
@@ -221,13 +237,15 @@
                                 <label>Usuario:</label>
                                 <select name="idUsuario" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Seleccione un usuario del Equipo">
+                                    <option selected="selected"  value="" data-select2-id="3" title="Seleccione un usuario del Equipo">
                                         Seleccione usuario del equipo</option>  
                                         @foreach($usuarios as $usuario)                                  
                                         <option value="{{$usuario->id}}">{{$usuario->primerNombre}} {{$usuario->primerApellido}}</option> 
-                                        @endforeach
-                                                                             
-                                </select>                                 
+                                        @endforeach                                                                             
+                                </select>  
+                                @error('idUsuario')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror                               
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -235,22 +253,20 @@
                                 <label>Estado:</label>
                                 <select name="estado" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Estado de Equipo">
-                                        Seleccione Estado del equipo</option>                                    
-                                        <option value="Activo">Activo</option> 
-                                        <option value="Inactivo">Inactivo</option>
-                                                                             
+                                    <option selected="selected" data-select2-id="3" title="Estado de Equipo"  value="Activo">
+                                        Activo</option>
+                                        <option value="Inactivo">Inactivo</option>                                                                             
                                 </select>                        
-                            </div><div class="form-group">
+                            </div>
+                            <div class="form-group">
                                 <label>Tipo de activo:</label>
                                 <select name="tipoActivo" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Tipo de activo">
+                                    <option selected="selected" data-select2-id="3" title="Tipo de activo"  value="">
                                         Seleccione Tipo de activo</option>                                    
                                         <option value="Activo fijo">Activo fijo</option> 
                                         <option value="Leasing">Leasing</option>
-                                        <option value="Comodato">Comodato</option>
-                                                                             
+                                        <option value="Comodato">Comodato</option>                                                                             
                                 </select>                        
                             </div>
                         </div>
@@ -261,15 +277,14 @@
                                 <label>¿Requiere Calibracion?:</label>
                                 <select name="calibracion" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Tipo de activo">
+                                    <option selected="selected" data-select2-id="3" title="Tipo de activo"  value="">
                                     Seleccione una opcion:</option>
                                     <option value="Si">Si</option>
                                     <option value="No">No</option>
                                 </select>
                                 @error('calibracion')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
-                                
+                                @enderror                                
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -293,7 +308,7 @@
                                 <label>Riesgo:</label>
                                 <select name="riesgo" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Tipo de riesgo">
+                                    <option selected="selected" data-select2-id="3" title="Tipo de riesgo" value="">
                                     Seleccione un topo de Riesgo:</option>
                                     <option value="I">I</option>
                                     <option value="IIA">IIA</option>
@@ -319,15 +334,16 @@
         </form>
     </div>
 @stop
+
 @section('css')
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/../css/style.css">
 @stop
 
 @section('js')
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
-            $('.select2').select2();           
+            //$('#myTable').DataTable();
+            //$('.select2').select2();           
         });
     </script>
 @stop

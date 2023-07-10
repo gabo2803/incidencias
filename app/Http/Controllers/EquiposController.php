@@ -60,14 +60,14 @@ class EquiposController extends Controller
             'marca' => 'required',
             'modelo' => 'required',
             'servitag',
-            'descripcion',
+            'descripcion'=> 'required',
             'idProvedor',
             'fechaAdquirido'=> 'required',
             'fechaAsignado',
             'garantia',
             'fechaVencGar',
-            'idSuperCategoria',
-            'idArea',
+            'idSuperCategoria'=> 'required',
+            'idArea'=> 'required',
             'caracteristicas',
             'precio',
             'idUsuario',
@@ -83,6 +83,7 @@ class EquiposController extends Controller
             $request['fechaUltimaCal']=null;
         } 
         $input = $request->all();
+        //dd($input);
         $equipo = Equipos::create($input); 
 
         if ($request->hasFile('file')) {

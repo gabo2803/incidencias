@@ -14,10 +14,8 @@ class PermissionTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'equipo-list',
-            'equipo-create',
-            'equipo-edit',
-            'equipo-delete',
+            'notificaciones-list',            
+            'notificaciones-delete',
             
          ];
          

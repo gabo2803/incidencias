@@ -1,12 +1,9 @@
 @extends('adminlte::page')
-@section('title', 'Usuarios')
+@section('title', 'Home Roles')
 @section('content')
     <div class="container mt-2">
         <div class="row">
-            <div class="col-lg-12 margin-tb">
-                <div class="float-left">
-                    <h2>Lista de roles</h2>
-                </div>
+            <div class="col-lg-12 margin-tb">                
                 <div class="float-right mt-2 mb-2">
                     @can('role-create')
                         <a class="btn btn-success" href="{{ route('roles.create') }}"> Nuevo Rol</a>
@@ -23,7 +20,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-head">
-                        <h5 class="pull-left ml-3 mt-2">Total R</h5>
+                        <h5 class="pull-left ml-3 mt-2">Total Roles</h5>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered" id="myTable">

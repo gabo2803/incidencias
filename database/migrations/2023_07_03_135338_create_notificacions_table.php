@@ -22,7 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('idIncidencia')->nullable();
             $table->foreign('idIncidencia')->references('id')->on('incidencias');
             $table->unsignedBigInteger('responsable')->nullable();
-            $table->foreign('responsable')->references('id')->on('users');
+            $table->foreign('responsable')->references('id')->on('supers');
             $table->timestamps();
         });
     }

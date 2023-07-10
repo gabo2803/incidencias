@@ -1,20 +1,19 @@
 @extends('adminlte::page')
-@section('title', 'Usuarios-show')
+@section('title', 'Usuarios Show')
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12 margin-tb">
-            <div class="pull-left mb-2">
+            <div class="float-left mt-2">
                 <h2>Detalles de Usuario</h2>
             </div>
-            <div class="pull-right mb-2">
+            <div class="float-right mt-2">
                 <a class="btn btn-primary" href="{{ route('usuarios.index') }}"> Atras</a>
             </div>
         </div>
     </div>
     <div class="card">
-        <div class="card-body">
-           
+        <div class="card-body">           
             <table class="table table-striped ">
                 <tbody>
                     <tr >
@@ -34,9 +33,7 @@
                         <td>{{$usuario->activo}}</td>
                         <th>Sexo:</th>
                         <td>{{$usuario->sexo}}</td>
-                    </tr>
-                    
-
+                    </tr> 
                 </tbody>
             </table>
         </div>
@@ -47,7 +44,7 @@
 
 @stop
 @section('css')
-    <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="/../css/style.css">
 @stop
 @section('js')
     <script>
