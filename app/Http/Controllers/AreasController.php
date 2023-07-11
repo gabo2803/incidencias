@@ -83,6 +83,7 @@ class AreasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Areas::find($id)->delete();
+        return response()->json(['success' => 'Area eliminada correctamente']);
     }
 }

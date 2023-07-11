@@ -25,7 +25,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                        <table class="table table-bordered" id="myTable">
+                        <table class="table table-bordered table-striped" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Id:</th>
@@ -49,17 +49,17 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                                <a class="btn btn-small btn-success" href="{{route('proveedores.show',$proveedor->id)}}">Show</a>
+                                                <a class="btn btn-sm btn-success" href="{{route('proveedores.show',$proveedor->id)}}">Show</a>
 
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                                 @can('proveedores-edit')
-                                                    <a class="btn btn-small btn-info" href="{{route('proveedores.edit',$proveedor->id)}}">Edit</a>
+                                                    <a class="btn btn-sm btn-info" href="{{route('proveedores.edit',$proveedor->id)}}">Edit</a>
                                                 @endcan
                                                 @can('proveedores-delete')
                                                     <form action="{{route('proveedores.destroy',$proveedor->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-small btn-danger">delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger">delete</button>
                                                     </form>
                                                 @endcan
                                             </div>

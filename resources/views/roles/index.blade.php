@@ -23,7 +23,7 @@
                         <h5 class="pull-left ml-3 mt-2">Total Roles</h5>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered" id="myTable">
+                        <table class="table table-bordered table-stri" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -40,17 +40,17 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                                <a class="btn btn-small btn-success"
+                                                <a class="btn btn-sm btn-success"
                                                     href="{{ route('roles.show', $rol->id) }}">Show</a>
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                                 @can('role-edit')
-                                                    <a class="btn btn-small btn-info" href="{{ route('roles.edit', $rol->id) }}">Edit</a>
+                                                    <a class="btn btn-sm btn-info" href="{{ route('roles.edit', $rol->id) }}">Edit</a>
                                                 @endcan
                                                 @can('role-delete')
                                                     <form action="{{ route('roles.destroy', $rol->id) }}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-small btn-danger">delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger">delete</button>
                                                     </form>
                                                 @endcan
                                             </div>

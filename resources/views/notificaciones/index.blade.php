@@ -14,7 +14,7 @@
                         <h5 class="pull-left ml-3 mt-2">Total notificaciones {{ $nnotificacion }} </h5>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered" id="myTable">
+                        <table class="table table-bordered table-striped" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Id:</th>
@@ -48,7 +48,7 @@
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
 
-                                                <a class="btn btn-small btn-info"
+                                                <a class="btn btn-sm btn-info"
                                                     href="{{ route('incidencias.show', $item->id_inc) }}">Ver</a>
 
 

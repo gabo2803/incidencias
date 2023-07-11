@@ -23,7 +23,7 @@
                         <h5 class="pull-left ml-3 mt-2">Total Cargos {{ count($cargos) }}</h5>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered" id="myTable">
+                        <table class="table table-bordered table-striped" id="myTable">
                             <thead>
                                 <tr>
                                     <th>Id:</th>
@@ -42,15 +42,14 @@
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                                 @can('cargos-edit')
-                                                    <a class="btn btn-small btn-info"
-                                                        href="{{ route('cargos.edit',$cargo->id) }}">Edit</a>
+                                                    <a class="btn btn-sm btn-info"
+                                                        href="{{ route('cargos.edit', $cargo->id) }}">Editar</a>
                                                 @endcan
                                                 @can('cargos-delete')
-                                                <a class="btn btn-danger btn-info eliminar"
-                                                    href="{{ route('cargos.destroy',$cargo->id) }}"
-                                                    >Eliminar</a>                                                    
+                                                    <a class="btn btn-danger btn-sm eliminar"
+                                                        href="{{ route('cargos.destroy', $cargo->id) }}">Eliminar</a>
                                                 @endcan
-                                            </div>
+                                       
                                         </td>
                                     </tr>
                                 @endforeach

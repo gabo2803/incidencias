@@ -1,4 +1,7 @@
 
 .sidebar-dark-blue {
-    background: rgb(27, 78,130) !important;
+    background: rgb(0, 54, 96)!important;
+}
+.navbar-light{
+  background-color: rgb(184, 218, 255)!important;
 }

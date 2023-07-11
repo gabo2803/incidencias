@@ -2,7 +2,7 @@
 @section('title', 'index-equipos')
 @section('content')
 
-    <div class="container mt-2">
+    <div class="container ">
         <div class="row">
             <div class="col-lg-12 margin-tb">                
                 <div class="float-right mt-2 mb-2">
@@ -24,8 +24,8 @@
                         <h4 class="pull-left ml-3 mt-2">Total Equipos {{ $nequipos }}</h4>
                     </div>
                     <div class="card-body">
-                        <table class="table table-bordered" id="myTable">
-                            <thead>
+                        <table class="table table-bordered table-striped" id="myTable">
+                            <thead  >
                                 <tr>
                                     <th>Id:</th>
                                     <th>Nombre:</th>
@@ -46,17 +46,17 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                                <a class="btn btn-small btn-success" href="{{route('equipos.show',$equipo->id)}}">Show</a>
+                                                <a class="btn btn-sm btn-success" href="{{route('equipos.show',$equipo->id)}}">Show</a>
 
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                                 @can('equipo-edit')
-                                                    <a class="btn btn-small btn-info" href="{{route('equipos.edit',$equipo->id)}}">Edit</a>
+                                                    <a class="btn btn-sm btn-info" href="{{route('equipos.edit',$equipo->id)}}">Edit</a>
                                                 @endcan
                                                 @can('equipo-delete')
                                                     <form action="{{route('equipos.destroy',$equipo->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-small btn-danger">delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger">delete</button>
                                                     </form>
                                                 @endcan
                                             </div>

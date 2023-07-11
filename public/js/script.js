@@ -21,6 +21,7 @@ $(document).ready(function () {
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
+              console.log( userURL);
                 $.ajax({
                     url: userURL,
                     method: 'DELETE',
@@ -39,6 +40,8 @@ $(document).ready(function () {
                         alert('Error: ' + response.statusText);
                     }
                 });
+            }else{
+                console.log('cancelo ');
             }
         });
     });
