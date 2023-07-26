@@ -12,6 +12,9 @@ use Spatie\Permission\Traits\HasRoles;
 
 
 
+
+
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
@@ -47,6 +50,10 @@ class User extends Authenticatable
     public function incidencias()
     {
         return $this->hasMany(Incidencias::class,'idUser');
+    }
+    public function rondas()
+    {
+        return $this->hasMany(Rondas::class,'idUsuario');
     }
     
     public function Notificacions()
@@ -90,4 +97,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    public function adminlte_image()
+    {
+       return asset('imagenes/usuario.png');
+    }
+
+    public function adminlte_desc()
+    {
+        return 'Quieres cerrar session?';
+    }
+
+    public function adminlte_profile_url()
+    {
+        return 'profile/username';
+    }
 }

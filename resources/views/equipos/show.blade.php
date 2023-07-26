@@ -4,10 +4,11 @@
     <div class="row">        
         <div class="col-lg-12 margin-tb">
             <div class="d-inline mb-2">
-                <h4 class="">Detalles del equipo {{$equipo->id}} {{$equipo->caracteristicas}}</h4>
-                <h3 class="btn btn-success" >{{count($equipo->incidencias)}} incidencias Reportadas</h3>
+                <h4 class="mt-2">Detalles del equipo : {{$equipo->caracteristicas}}</h4>
+                <span class=" text-success  m-2"  >Incidencias Reportadas {{count($equipo->incidencias)}}</span>
             </div>
             <div class="float-right">
+                <a class="btn btn-primary" href="{{url('generarPdf',$equipo->id)}}">Download PDF</a>
                 <a class="btn btn-primary" href="{{ route('equipos.index') }}"> Atras</a>
             </div>
         </div>
@@ -78,6 +79,39 @@
                 </tbody>
             </table>
         </div>
+        @if($narchivo != 0)
+        <div class="card-footer text-muted">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Archivo:</th>
+                        <th>Action:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($archivos as $archivo)
+                        <tr>
+                            <td>{{ $archivo->nombre }}</td>
+                            <td>
+                                <div class="btn-group" role="group"
+                                    aria-label="Basic mixed styles example">
+                                    <a target="_blank" class="btn btn-small btn-success"
+                                        href="{{ url('verArchivo', $archivo->id) }}"> ver</a>
+                                    <a class="btn btn-small btn-info"
+                                        href="{{ url('descargarArchivo', $archivo->id) }}">descargar</a>
+                                   
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+       
+        </div>
+        @else
+        <span class="border  text-success m-2" >
+          <p class="m-2"> El equipo no registra archivos</p>
+        </span>
+        @endif
     </div>
 @stop
 

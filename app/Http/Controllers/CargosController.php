@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cargos;
 use Illuminate\Http\Request;
 use App\Models\Areas;
+use App\Models\User;
 
 class CargosController extends Controller
 {   
@@ -95,7 +96,12 @@ class CargosController extends Controller
     public function destroy(string $id)
     {
         
-        Cargos::find($id)->delete();
+        $cargo = Cargos::findOrFail($id);
+        $area = $cargo->idArea;
+        $cargo->area()->dissociate();
+        $usurs = User::Where('idCargo',$cargo->id);
+        
+        $cargo->delete();
         return response()->json(['success' => 'Cargo eliminado correctamente']);   
 
     }

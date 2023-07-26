@@ -19,18 +19,18 @@
             <div class="col">
                 <div class="card">
                     <div class="card-head">
-                        <h4 class="pull-left ml-3 mt-2">Total usuarios {{ count($usuarios) }}</h4>
+                        <h4 class="pull-left ml-3 mt-2">Total usuarios : {{ count($usuarios) }}</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped" id="myTable">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Nombre</th>
-                                    <th>Cargo</th>
-                                    <th>Email</th>
-                                    <th>Rol</th>
-                                    <th>Action</th>
+                                    <th>Id:</th>
+                                    <th>Nombres:</th>
+                                    <th>Cargo:</th>
+                                    <th>Email:</th>
+                                    <th>Rol:</th>
+                                    <th>Acciones:</th>
 
                                 </tr>
                             </thead>
@@ -38,7 +38,7 @@
                                 @foreach ($usuarios as $usuario)
                                     <tr>
                                         <td>{{ $usuario->id }}</td>
-                                        <td>{{ $usuario->primerNombre }}</td>
+                                        <td>{{ $usuario->primerNombre }} {{ $usuario->primerApellido }} </td>
                                         <td>{{ $usuario->cargo->descripcion }}</td>
                                         <td>{{ $usuario->email }}</td>
                                         <td>{{ $usuario->rol }}</td>
@@ -46,22 +46,17 @@
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
                                                 <a class="btn btn-sm btn-success"
-                                                    href="{{ URL::to('usuarios', $usuario->id) }}">Show</a>
+                                                    href="{{ URL::to('usuarios', $usuario->id) }}">Ver</a>
 
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
                                                 <a class="btn btn-sm btn-info"
-                                                    href="{{ route('usuarios.edit', $usuario->id) }}">Edit</a>
-                                                <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                                </form>
+                                                    href="{{ route('usuarios.edit', $usuario->id) }}">Editar</a>
+                                                    <a  class="btn btn-danger btn-sm eliminar_user"
+                                                    href="{{ route('usuarios.destroy',$usuario->id) }}"
+                                                    >Eliminar</a>
 
                                             </div>
-
-
-
-                                            </th>
+                                        </th>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -80,9 +75,6 @@
     <link rel="stylesheet" href="css/style.css">
 @stop
 @section('js')
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/script.js"></script>
 @stop

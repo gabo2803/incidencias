@@ -142,7 +142,7 @@
                                         value="@foreach ($userroles as $rol) {{ $rol }}" @endforeach title="Seleccione
                                         Rol">
                                         @foreach ($userroles as $rol)
-                                            {{ $rol }}(actual)
+                                            {{ $rol }} (actual)
                                         @endforeach
                                     </option>
                                     @foreach ($roles as $rol)
@@ -180,9 +180,5 @@
     <link rel="stylesheet" href="/../css/style.css">
 @stop
 @section('js')
-    <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable();
-        });
-    </script>
+<script src="js/script.js"></script>
 @stop

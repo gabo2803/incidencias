@@ -33,9 +33,10 @@ class IncidenciasController extends Controller
      */
     public function index()
     {
-
-        $incidencias = Incidencias::all();
-
+        $incidencias = Incidencias::join('users', 'users.id', '=','incidencias.idAsignadoA')
+                                    ->select('incidencias.*','users.primerNombre as nombre','users.primerApellido as apellido')            
+                                    ->get();
+    
         return view('incidencias.index', compact('incidencias'));
     }
     /**
@@ -100,7 +101,7 @@ class IncidenciasController extends Controller
 
     public function show(Incidencias $incidencia)
     {
-
+       
         return view('incidencias.show', compact('incidencia'));
     }
     /**
@@ -172,7 +173,7 @@ class IncidenciasController extends Controller
        
         if ($request->idAsignadoA !=  $idAsignadoAnterior && $request->idAsignadoA != Auth::user()->id) {
 
-            dd( $users->email);//Notification::route('mail',$users->email)->notify(new IncidenciasAsignadas($incidencia));
+            //Notification::route('mail','gabo2803@hotmail.com')->notify(new otra($incidencia));
 
         }
 

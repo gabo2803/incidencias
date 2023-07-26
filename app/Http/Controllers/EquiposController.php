@@ -13,6 +13,7 @@ use App\Models\Archivo;
 use Illuminate\Support\Facades\File;
 use League\Flysystem\Filesystem;
 use PhpParser\Node\Stmt\Return_;
+use Barryvdh\DomPDF\PDF;
 
 class EquiposController extends Controller
 {
@@ -31,10 +32,10 @@ class EquiposController extends Controller
     {
         $equipos = Equipos::all();
         $supercategoria = Supers::all();
-        $nequipos = Equipos::count();
-        //dd($equipos);
+        $nequipos = Equipos::count();        
         return view('equipos.index', compact('equipos', 'supercategoria', 'nequipos'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -60,31 +61,31 @@ class EquiposController extends Controller
             'marca' => 'required',
             'modelo' => 'required',
             'servitag',
-            'descripcion'=> 'required',
+            'descripcion' => 'required',
             'idProvedor',
-            'fechaAdquirido'=> 'required',
+            'fechaAdquirido' => 'required',
             'fechaAsignado',
             'garantia',
             'fechaVencGar',
-            'idSuperCategoria'=> 'required',
-            'idArea'=> 'required',
+            'idSuperCategoria' => 'required',
+            'idArea' => 'required',
             'caracteristicas',
             'precio',
             'idUsuario',
             'estado',
             'tipoActivo',
-            'calibracion'=> 'required',
+            'calibracion' => 'required',
             'frecuenciaCal',
             'fechaUltimaCal',
             'riesgo'
-        ]); 
-        if ($request['calibracion']== 'No') {
-            $request['frecuenciaCal']=null;
-            $request['fechaUltimaCal']=null;
-        } 
+        ]);
+        if ($request['calibracion'] == 'No') {
+            $request['frecuenciaCal'] = null;
+            $request['fechaUltimaCal'] = null;
+        }
         $input = $request->all();
         //dd($input);
-        $equipo = Equipos::create($input); 
+        $equipo = Equipos::create($input);
 
         if ($request->hasFile('file')) {
             foreach ($request->file('file') as $file) {
@@ -107,7 +108,7 @@ class EquiposController extends Controller
             }
         }
         if ($request['idUsuario']) {
-             $equipo->users()->attach($request['idUsuario']);
+            $equipo->users()->attach($request['idUsuario']);
         }
         return redirect()->route('equipos.index')
             ->with('success', 'Equipo Creado exitosamente');
@@ -118,8 +119,11 @@ class EquiposController extends Controller
      */
     public function show(string $id)
     {
-        $equipo = Equipos::find($id);        
-        return view('equipos.show', compact('equipo'));
+        $equipo = Equipos::find($id);
+        $archivos = Archivo::where('idEquipo', $equipo->id)->get();
+        $narchivo = count($archivos);
+        //dd($narchivo);
+        return view('equipos.show', compact('equipo', 'archivos', 'narchivo'));
     }
 
     /**
@@ -132,10 +136,10 @@ class EquiposController extends Controller
         $categorias = Supers::all();
         $areas = Areas::all();
         $usuarios = User::all('id', 'primerNombre', 'primerApellido');
-        $archivos = Archivo::where('idEquipo',$equipo->id)->get();
+        $archivos = Archivo::where('idEquipo', $equipo->id)->get();
         //dd( $archivos );
 
-        return view('equipos.edit', compact('equipo','proveedores','categorias','areas','usuarios','archivos'));
+        return view('equipos.edit', compact('equipo', 'proveedores', 'categorias', 'areas', 'usuarios', 'archivos'));
     }
 
     /**
@@ -144,13 +148,13 @@ class EquiposController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'serial' => 'required|unique:equipos,serial,'.$id,
+            'serial' => 'required|unique:equipos,serial,' . $id,
             'marca' => 'required',
             'modelo' => 'required',
             'servitag',
             'descripcion',
             'idProvedor',
-            'fechaAdquirido'=> 'required',
+            'fechaAdquirido' => 'required',
             'fechaAsignado',
             'garantia',
             'fechaVencGar',
@@ -161,15 +165,15 @@ class EquiposController extends Controller
             'idUsuario',
             'estado',
             'tipoActivo',
-            'calibracion'=> 'required',
+            'calibracion' => 'required',
             'frecuenciaCal',
             'fechaUltimaCal',
             'riesgo'
-        ]);       
-        if ($request['calibracion']== 'No') {
-            $request['frecuenciaCal']=null;
-            $request['fechaUltimaCal']=null;
-        } 
+        ]);
+        if ($request['calibracion'] == 'No') {
+            $request['frecuenciaCal'] = null;
+            $request['fechaUltimaCal'] = null;
+        }
         $input = $request->all();
         //dd( $input );
         $equipo = Equipos::find($id);
@@ -196,11 +200,11 @@ class EquiposController extends Controller
             }
         }
         if ($request['idUsuario']) {
-             $equipo->users()->attach($request['idUsuario']);
+            $equipo->users()->attach($request['idUsuario']);
         }
 
 
-        
+
         return redirect()->route('equipos.index')
             ->with('success', 'Equipo Actualizado Exitosamente');
     }

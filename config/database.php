@@ -77,6 +77,16 @@ return [
             'search_path' => 'public',
             'sslmode' => 'prefer',
         ],
+        'sios' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST2', '192.168.1.95'),
+            'port' => env('DB_PORT2', '1433'),
+            'database' => env('DB_DATABASE2', 'sios'),
+            'username' => env('DB_USERNAME2', 'sa'),
+            'password' => env('DB_PASSWORD2', 'sa1_xxxx'),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
 
         'sqlsrv' => [
             'driver' => 'sqlsrv',

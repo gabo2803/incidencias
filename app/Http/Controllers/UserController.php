@@ -19,7 +19,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();        
+        $usuarios = User::leftjoin('model_has_roles','users.id','=','model_has_roles.model_id')
+                        ->leftjoin('roles','model_has_roles.role_id','=','roles.id')
+                        ->select('users.*','roles.name as rol')
+                        ->orderby('users.id')
+                        ->get();
+        //dd($usuarios);       
         return view('usuarios.index', compact('usuarios'));
     }
 
@@ -85,9 +90,9 @@ class UserController extends Controller
     public function edit(string $id)
     {
         $usuario = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();        
+        $roles = Role::pluck('name', 'name')->all();
         $userroles = $usuario->roles->pluck('name')->all();  
-        //dd($userroles);
+       
         $cargos = Cargos::orderBy('descripcion','ASC')->get(); 
         $responsable = Supers::where('responsable',$id)->first();
         //dd($userroles);

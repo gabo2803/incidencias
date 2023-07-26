@@ -21,7 +21,7 @@
             <div class="col">
                 <div class="card">
                     <div class="card-head">
-                        <h4 class="pull-left ml-3 mt-2">Total Equipos {{ $nequipos }}</h4>
+                        <h4 class="pull-left ml-3 mt-2">Total Equipos : {{ $nequipos }}</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped" id="myTable">

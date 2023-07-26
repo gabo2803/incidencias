@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\NotificacionesController;
 use App\Http\Controllers\AreasController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\RondasController;
+use Dompdf\Adapter\PDFLib;
+use App\Http\Controllers\GraficoController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,11 +48,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('cargos',CargosController::class);
     Route::resource('notificaciones',NotificacionesController::class);
     Route::resource('areas',AreasController::class);
-    //archivos
+    Route::resource('rondas',RondasController::class);
+
+    //archivos    
     Route::get('descargarArchivo/{id}',[ArchivoController::class,'descargarArchivo']);
     Route::get('verArchivo/{id}',[ArchivoController::class,'verArchivo']);
     Route::delete('eliminarArchivo/{id}',[ArchivoController::class,'eliminarArchivo'])->name('eliminar_archivo');
     
+    //pdf
+    Route::get('generarPdf/{id}',[PDFController::class,'generarPdf']);
+
+    //adicional de rondas   
+    Route::get('graficos',[GraficoController::class,'generarGrafico']);
+
+
+   
+
 });
 
 

@@ -132,9 +132,9 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => true,
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -334,6 +334,7 @@ return [
             'url'  => 'roles',
             'icon' => 'fas fa-fw fa-user-cog',
         ],
+        
 
         [
             'text'    => 'Mas',
@@ -356,6 +357,11 @@ return [
                     'text' => 'Notificaciones',
                     'url'  => 'notificaciones',
                 ],
+                [
+                    'text' => 'Rondas de Seguridad',
+                    'url'  => 'rondas',
+                ],
+                
             ],
         ],
         
