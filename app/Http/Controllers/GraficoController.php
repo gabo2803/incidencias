@@ -36,7 +36,7 @@ class GraficoController extends Controller
             $respuestas3['Si'][] = PreguntasRespuestas::where('pregunta', $pregunta)->where('respuesta', 'Si')->count();
             $respuestas3['No'][] = PreguntasRespuestas::where('pregunta', $pregunta)->where('respuesta', 'No')->count();
         }
-        $preguntas4 = ['Tiene_manilla_de_caida', 'Registro_clinico_del_riesgo', 'Varandas_elevadas'];
+        $preguntas4 = ['Tiene_manilla_de_caida', 'Registro_clinico_del_riesgo', 'Varandas_elevadas','Informacion_al_paciente_del_riesgo'];
         $respuestas4 = ['Sí' => [], 'No' => []];
 
         foreach ($preguntas4 as $pregunta) {

@@ -21,7 +21,7 @@
                 <tbody>
                     <tr >
                         <th>Equipo:</th>
-                        <td>{{$incidencia->equipo->descripcion}}</td>
+                        <td><a href="{{ route('equipos.show', $incidencia->equipo->id) }}">{{$incidencia->equipo->descripcion}}</a></td>
                         <th>Area:</th>
                         <td>{{{$incidencia->equipo->area->description}}}</td>
                     </tr>
@@ -34,7 +34,7 @@
                         </td> 
                         
                         <th>Quien reporto:</th>
-                        <td>{{$incidencia->asignadoPor->primerNombre}}</td>
+                        <td>{{$incidencia->asignadoPor->primerNombre}} {{$incidencia->asignadoPor->primerApellido}}</td>
                     </tr>
                     <tr >
                         <th>Titulo:</th>

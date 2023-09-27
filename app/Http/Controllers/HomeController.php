@@ -7,6 +7,7 @@ use App\Models\Incidencias;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,7 @@ class HomeController extends Controller
             ->orderBy('month')
             ->pluck('total', 'month')
             ->toArray();
+            
         $cantidadIncidencias = Incidencias::count();
         $incidenciasActivas = Incidencias::where('idEstado',5)
                                             ->where('idAsignadoA',$usuario->id)
@@ -40,7 +42,12 @@ class HomeController extends Controller
         //dd($incidenciasActivas, $usuario->id);
         $cantidadUser = User::count();
         $cantidadEquipos = Equipos::count();
-       
-        return view('home', compact('usuario', 'monthlySales', 'cantidadIncidencias' ,'cantidadUser','cantidadEquipos','incidenciasActivas'));
+
+        $totalareas = Incidencias::select('tipos.descripcion as area', DB::raw('count(*) as total'))
+                                    ->join('tipos','tipos.id','=','incidencias.idTipoIncidencia')                                    
+                                    ->groupBy('area')
+                                    ->get();
+        //dd( $totalareas);
+        return view('home', compact('usuario', 'monthlySales', 'cantidadIncidencias' ,'cantidadUser','cantidadEquipos','incidenciasActivas','totalareas'));
     }
 }

@@ -180,5 +180,5 @@
     <link rel="stylesheet" href="/../css/style.css">
 @stop
 @section('js')
-<script src="js/script.js"></script>
+<script src="/../js/script.js"></script>
 @stop

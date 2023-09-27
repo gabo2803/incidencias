@@ -14,8 +14,10 @@ class PermissionTableSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            'notificaciones-list',            
-            'notificaciones-delete',
+            'listar-areas',            
+            'eliminar-areas',
+            'editar-areas',
+            'crear-areas'
             
          ];
          

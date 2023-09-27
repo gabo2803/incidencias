@@ -29,7 +29,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Primer Nombre:</label>
-                                <input type="text" name="primerNombre" class="form-control" placeholder="Primer Nombre">
+                                <input type="text" name="primerNombre" class="form-control" placeholder="Primer Nombre" value={{old('primerNombre')}}>
                                 @error('primerNombre')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                 @enderror
@@ -39,7 +39,7 @@
                             <div class="form-group">
                                 <label>Segundo Nombre:</label>
                                 <input type="text" name="segundoNombre" class="form-control"
-                                    placeholder="Segundo Nombre">                                
+                                    placeholder="Segundo Nombre" value={{old('segundoNombre')}}>                                
                             </div>
                         </div>
                     </div>
@@ -48,7 +48,7 @@
                             <div class="form-group">
                                 <label>Primer Apellido:</label>
                                 <input type="text" name="primerApellido" class="form-control"
-                                    placeholder="Primer Apellido">
+                                    placeholder="Primer Apellido" value={{old('primerApellido')}}>
                                 @error('primerApellido')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                 @enderror
@@ -58,7 +58,7 @@
                             <div class="form-group">
                                 <label>Segundo Apellido:</label>
                                 <input type="text" name="segundoApellido" class="form-control"
-                                    placeholder="Segundo Apellido">                               
+                                    placeholder="Segundo Apellido" value={{old('segundoApellido')}}>                               
                             </div>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                             <div class="form-group">
                                 <label for="">Password:</label>
                                 <input type="password" class="form-control" name="password" id=""
-                                    aria-describedby="helpId" placeholder="Password">                               
+                                    aria-describedby="helpId" placeholder="Password" value={{old('password')}}>                               
                             </div>
                             @error('password')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -76,7 +76,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="">Email:</label>
-                                <input type="email" name="email" id="" class="form-control" placeholder="Email">
+                                <input type="email" name="email" id="" class="form-control" placeholder="Email" value={{old('email')}}>
                             </div>
                             @error('email')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -88,7 +88,7 @@
                             <div class="form-group">
                                 <label for="">Confirmar Password:</label>
                                 <input type="password" class="form-control" name="confirm-password" id=""
-                                    aria-describedby="helpId" placeholder="Confirmar Password">                               
+                                    aria-describedby="helpId" placeholder="Confirmar Password" value={{old('confirm-password')}}>                               
                             </div>
                             @error('password')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>

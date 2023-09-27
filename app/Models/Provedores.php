@@ -10,7 +10,7 @@ class Provedores extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
+         'nombre',
          'nit',
          'email',
          'direccion',

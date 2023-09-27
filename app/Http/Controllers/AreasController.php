@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class AreasController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:listar-areas|crear-areas|editar-areas|eliminar-areas', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear-areas', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-areas', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-areas', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */

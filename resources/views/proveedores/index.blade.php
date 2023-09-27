@@ -4,9 +4,9 @@
 
     <div class="container mt-2">
         <div class="row">
-            <div class="col-lg-12 margin-tb">                
+            <div class="col-lg-12 margin-tb">
                 <div class="float-right mt-2 mb-2">
-                    @can('equipo-create')
+                    @can('crear-proveedores')
                         <a class="btn btn-success" href="{{ route('proveedores.create') }}">Crear nuevo Proveedor</a>
                     @endcan
                 </div>
@@ -49,17 +49,17 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                                <a class="btn btn-sm btn-success" href="{{route('proveedores.show',$proveedor->id)}}">Show</a>
+                                                <a class="btn btn-sm btn-success" href="{{route('proveedores.show',$proveedor->id)}}"title="Detalles del proveedor"><i class="fa-solid fa-eye"></i></a>
 
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                                                @can('proveedores-edit')
-                                                    <a class="btn btn-sm btn-info" href="{{route('proveedores.edit',$proveedor->id)}}">Edit</a>
+                                                @can('editar-proveedores')
+                                                    <a class="btn btn-sm btn-info ml-1" href="{{route('proveedores.edit',$proveedor->id)}}"title="Editar proveedor"><i class="fas fa-marker"></i></a>
                                                 @endcan
-                                                @can('proveedores-delete')
+                                                @can('eliminar-proveedores')
                                                     <form action="{{route('proveedores.destroy',$proveedor->id)}}" method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">delete</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger ml-1"title="Eliminar proveedor"><i class="far fa-trash-alt"></i></button>
                                                     </form>
                                                 @endcan
                                             </div>
@@ -84,6 +84,7 @@
 @stop
 
 @section('js')
+<script src="https://kit.fontawesome.com/715ccab37c.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();

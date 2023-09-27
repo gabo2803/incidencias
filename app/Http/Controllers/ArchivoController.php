@@ -35,7 +35,7 @@ class ArchivoController extends Controller
 
             Storage::disk('ftp')->delete($rutaArchivo);
             $archivo->delete();
-            return response()->json(['success' => 'ojo Archivo eliminado correctamente']);
+            return response()->json(['success' => 'Archivo eliminado correctamente']);
        
 
 

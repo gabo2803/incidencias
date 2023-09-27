@@ -12,14 +12,18 @@ use Illuminate\Support\Carbon;
 
 class RondasController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:listar-rondas|eliminar-rondas|crear-rondas|editar-rondas', ['only' => ['index', 'show']]);
+        $this->middleware('permission:crear-rondas',['only'=>['create','store']]);
+        $this->middleware('permission:eliminar-rondas', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $usuarios = Rondas::all();
-
-        //dd($usuarios);
+        $usuarios = Rondas::all();        
         return view('rondas.index', compact('usuarios'));
     }
     
@@ -34,7 +38,6 @@ class RondasController extends Controller
      */
     public function create()
     {
-
         $usuarios = DB::connection('sios')->table('Pacientes as p')
             ->join('CasosActivos as c', 'p.id', '=', 'c.Paciente')
             ->leftjoin('unidades as u', 'u.Codigo', 'c.UnidadFuncionalActual')
@@ -49,7 +52,49 @@ class RondasController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+         $messages = [
+            'Tiene_manilla_de_Identificacion.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Requiere_otra_Manilla.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Tablero_de_Identificacion.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Realizo_educacion_al_Paciente.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Explicacion_al_Paciente_del_Medicamentos.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Identifico_y_registro_alergia_del_paciente_al_medicamento.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Registro_Clinico_de_la_Informacion_al_Paciente.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Verificacion_de_la_venopuncion.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Equipos_y_liquidos_marcados.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Verficacion_de_cambios_de_Equipos_y_Liquidos.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Tiene_manilla_de_caida.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Registro_clinico_del_riesgo.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Varandas_elevadas.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Informacion_al_paciente_del_riesgo.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Tiene_firmado_consentimiento_informado.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Explico_los_Riesgos_asociados_a_la_atención.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Brindo_Informacion_sobre_los_cuidados_durante_la_estancia_en_la_institución.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            'Registro_la_informacion_que_se_le_brindo_al_paciente.required' => 'El campo es requerido, debes seleccionar una opción. "Si o NO"',
+            // Puedes agregar más mensajes personalizados aquí para otras validaciones si es necesario
+        ];
+        $this->validate($request,[
+            'Tiene_manilla_de_Identificacion' => 'required|in:Si,No',
+            'Requiere_otra_Manilla' => 'required|in:Si,No',
+            'Tablero_de_Identificacion' => 'required|in:Si,No',
+            'Realizo_educacion_al_Paciente' => 'required|in:Si,No',
+            'Explicacion_al_Paciente_del_Medicamentos' => 'required|in:Si,No',
+            'Identifico_y_registro_alergia_del_paciente_al_medicamento'  => 'required|in:Si,No',
+            'Registro_Clinico_de_la_Informacion_al_Paciente'=> 'required|in:Si,No',
+            'Verificacion_de_la_venopuncion'=> 'required|in:Si,No',
+            'Equipos_y_liquidos_marcados'=>'required|in:Si,No',
+            'Verficacion_de_cambios_de_Equipos_y_Liquidos'=> 'required|in:Si,No',
+            'Tiene_manilla_de_caida'=> 'required|in:Si,No',
+            'Registro_clinico_del_riesgo'=> 'required|in:Si,No',
+            'Varandas_elevadas'=> 'required|in:Si,No',
+            'Informacion_al_paciente_del_riesgo'=> 'required|in:Si,No',
+            'Tiene_firmado_consentimiento_informado'=> 'required|in:Si,No',
+            'Explico_los_Riesgos_asociados_a_la_atención'=> 'required|in:Si,No',
+            'Brindo_Informacion_sobre_los_cuidados_durante_la_estancia_en_la_institución'=> 'required|in:Si,No',
+            
+            'Registro_la_informacion_que_se_le_brindo_al_paciente'=> 'required|in:Si,No',
+        ],$messages); 
+         //dd($request);
         $ronda = new Rondas();
         $ronda->cedulaPaciente = $request->input("identificacion");
         $ronda->AfiNombre1 = $request->input("Nombre1");
@@ -62,12 +107,12 @@ class RondasController extends Controller
         $ronda->idUsuario = Auth::user()->id;
         $ronda->save();
 
+       
+
         $idronda = $ronda->id;
-
-
         $respuestas = $request->except('_token', 'identificacion', 'Nombre1', 'Nombre2', 'apellido1', 'apellido2', 'sexo', 'servicio', 'fechaIngreso'); // Obtener todas las respuestas excepto el campo _token
 
-        //dd( $idronda);
+        //dd( $respuestas);
         // Iterar sobre las respuestas recibidas
         foreach ($respuestas as $pregunta => $respuesta) {
             // Crear un nuevo registro de Respuesta en la base de datos

@@ -48,6 +48,9 @@
                                         <option value="{{ $equipo->id }}">{{ $equipo->descripcion }}</option>
                                     @endforeach
                                 </select>
+                                @error('idEquipo')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-2" data-select2-id="30">
@@ -61,6 +64,9 @@
                                         <option value="{{ $tipo->id }}">{{ $tipo->descripcion }}</option>
                                     @endforeach
                                 </select>
+                                @error('idTipoIncidencia')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-2" data-select2-id="30">
@@ -74,20 +80,17 @@
                                     <option value="Media">Media</option>
                                     <option value="Baja">Baja</option>
                                 </select>
+                                @error('prioridad')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-2" data-select2-id="30">
-                            <div class="form-group" data-select2-id="29">
+                            <div class="form-group">
                                 <strong>Estado:</strong>
-                                <select name="idEstado" id="estado"
-                                    class="form-control select2 select2-hidden-accessible" style="width: 100%;"
-                                    data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option value="" title="Seleccione Estado">Seleccione Estado</option>
-                                    @foreach ($estados as $estado)
-                                        <option value="{{ $estado->id }}">{{ $estado->descripcion }}</option>
-                                    @endforeach
-
-                                </select>
+                                <input type="text" class="form-control" readonly="readonly"
+                                    placeholder="Estado incidencia de la Incidencia" value="{{ $estado->descripcion }}">
+                                <input type="hidden" name="idEstado" id="estado" value="{{ $estado->id }}">
                             </div>
                         </div>
                     </div>
@@ -114,13 +117,16 @@
                                 <strong>Asignado para solucion:</strong>
                                 <select name="idAsignadoA" class="form-control select2 select2-hidden-accessible"
                                     style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option selected="selected" data-select2-id="3" title="Asignado para dar solucion">
+                                    <option selected="selected" value="" data-select2-id="3" title="Asignado para dar solucion">
                                         Asignado para dar solucion</option>
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">{{ $user->primerNombre }}
                                             {{ $user->primerApellido }}</option>
                                     @endforeach
                                 </select>
+                                @error('idAsignadoA')
+                                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -157,7 +163,7 @@
     </div>
 @stop
 @section('css')
-<link rel="stylesheet" href="/../../css/style.css">
+    <link rel="stylesheet" href="/../../css/style.css">
 @stop
 
 @section('js')

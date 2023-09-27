@@ -22,7 +22,7 @@
     </a>
 
     {{-- Menu items --}}
-    <ul class="nav nav-treeview">
+    <ul class="nav nav-treeview">        
         @each('adminlte::partials.sidebar.menu-item', $item['submenu'], 'item')
     </ul>
 

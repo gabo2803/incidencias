@@ -15,14 +15,15 @@ use League\Flysystem\Filesystem;
 use PhpParser\Node\Stmt\Return_;
 use Barryvdh\DomPDF\PDF;
 
+
 class EquiposController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:equipo-list|equipo-create|equipo-edit|equipo-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:equipo-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:equipo-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:equipo-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:listar-equipos|crear-equipos|editar-equipos|eliminar-equipos', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear-equipos', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-equipos', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-equipos', ['only' => ['destroy']]);
     }
 
     /**
@@ -218,4 +219,5 @@ class EquiposController extends Controller
         return redirect()->route('equipos.index')
             ->with('success', 'equipos deleted successfully');
     }
+    
 }

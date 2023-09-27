@@ -21,10 +21,10 @@ class IncidenciasController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:incidencias-list|incidencias-create|incidencias-edit|incidencias-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:incidencias-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:incidencias-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:incidencias-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:listar-incidencias|crear-incidencias|editar-incidencias|eliminar-incidencias', ['only' => ['index', 'show']]);
+        $this->middleware('permission:crear-incidencias', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-incidencias', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-incidencias', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -49,8 +49,8 @@ class IncidenciasController extends Controller
         $users = User::all();
         $tipos = Tipos::all();
         $equipos = Equipos::all();
-        $estados = Estados::all();
-        return view('incidencias.create', compact('tipos', 'equipos', 'estados', 'users'));
+        $estado = Estados::where('descripcion','Asignado')->first();
+        return view('incidencias.create', compact('tipos', 'equipos', 'estado', 'users'));
     }
     /**
      * Store a newly created resource in storage.
@@ -64,13 +64,13 @@ class IncidenciasController extends Controller
         $request->validate([
             'idUser' => 'required',
             'idEquipo' => 'required',
-            'idTipoIncidencia' ,
+            'idTipoIncidencia'  => 'required',
             'prioridad' => 'required',
             'idEstado' ,
             'titulo' => 'required',
             'idAsignadoPor' => 'required',
             'fechaLimite',
-            'idAsignadoA',
+            'idAsignadoA'=> 'required',
             'descripcion' => 'required',
             'observacion' ,
             'comentarioSolucion'
@@ -86,7 +86,7 @@ class IncidenciasController extends Controller
         $notificacion->save();
         $email = $notificacion->supers->users->email;
         //dd($email);
-        $var =  Notification::route('mail', $email)->notify(new otra($incidencia));
+        $var =  Notification::route('mail',  $email)->notify(new otra($incidencia));
         //dd($var);
 
         return redirect()->route('incidencias.index')

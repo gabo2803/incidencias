@@ -34,7 +34,7 @@
                             </div>
                             @error('serial')
                                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                @enderror
+                            @enderror
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">

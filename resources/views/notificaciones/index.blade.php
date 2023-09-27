@@ -45,17 +45,15 @@
                                         </td>
                                         <td>{{ $item->incidencias->created_at->format('Y-m-d H:i:s') }}</td>
                                         <td>
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-
-                                                <a class="btn btn-sm btn-info"
-                                                    href="{{ route('incidencias.show', $item->id_inc) }}">Ver</a>
-
-
-                                                    <a  class="btn btn-danger btn-info eliminar"
-                                                    href="{{ route('notificaciones.destroy',$item->id) }}"
-                                                    >Eliminar</a>
-                                            </div>
+                                                <a class="btn btn-info"
+                                                    href="{{ route('incidencias.show', $item->id_inc) }}"title="Detalles de usuario"><i
+                                                        class="fa-solid fa-eye"></i></a>
+                                                @can('eliminar-notificaciones')
+                                                    <a class="btn btn-danger  eliminar"
+                                                        href="{{ route('notificaciones.destroy', $item->id) }}"
+                                                        title="Eliminar usuario"><i class="far fa-trash-alt"></i></a>
+                                                @endcan
                                         </td>
                                     </tr>
                                 @endforeach
@@ -73,5 +71,6 @@
 @stop
 
 @section('js')
+<script src="https://kit.fontawesome.com/715ccab37c.js" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
 @stop

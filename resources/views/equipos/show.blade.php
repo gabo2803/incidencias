@@ -4,11 +4,11 @@
     <div class="row">        
         <div class="col-lg-12 margin-tb">
             <div class="d-inline mb-2">
-                <h4 class="mt-2">Detalles del equipo : {{$equipo->caracteristicas}}</h4>
-                <span class=" text-success  m-2"  >Incidencias Reportadas {{count($equipo->incidencias)}}</span>
+                <h4 class="alert alert-info mt-2">Detalles del equipo: {{$equipo->caracteristicas}}</h4>
+                <span class=" alert alert alert-warning"  style="background:  #fcf8e3" >Incidencias Reportadas {{count($equipo->incidencias)}}</span>
             </div>
             <div class="float-right">
-                <a class="btn btn-primary" href="{{url('generarPdf',$equipo->id)}}">Download PDF</a>
+                <a class="btn btn-primary" href="{{url('generarPdf',$equipo->id)}}">Generar PDF</a>
                 <a class="btn btn-primary" href="{{ route('equipos.index') }}"> Atras</a>
             </div>
         </div>
@@ -109,7 +109,7 @@
         </div>
         @else
         <span class="border  text-success m-2" >
-          <p class="m-2"> El equipo no registra archivos</p>
+          <p class="alert alert alert-warning m-2" style="background:  #fcf8e3">-El equipo no registra archivos</p>
         </span>
         @endif
     </div>

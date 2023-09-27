@@ -12,8 +12,8 @@ class NotificacionesController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:notificaciones-list|incidencias-create|incidencias-edit|incidencias-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:notificaciones-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:listar-notificaciones|eliminar-notificaciones', ['only' => ['index', 'show']]);
+        $this->middleware('permission:eliminar-notificaciones', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

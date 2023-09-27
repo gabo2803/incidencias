@@ -39,16 +39,13 @@
                                         <td>{{ $area->description }}</td>
                                         <td>{{ $area->piso }}</td>
                                         <td>
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-
-                                                <a class="btn btn-sm btn-info"
-                                                    href="{{ route('areas.edit', $area->id) }}">Editar</a>
-
-
-                                                <a class="btn btn-danger btn-sm eliminar"
-                                                    href="{{ route('areas.destroy', $area->id) }}">Eliminar</a>
-                                            </div>
+                                            <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{ route('areas.edit', $area->id) }}"title="Editar Area"><i
+                                                    class="fas fa-marker"></i></a>
+                                            <a class="btn btn-danger btn-sm eliminar"
+                                                href="{{ route('areas.destroy', $area->id) }}"title="Eliminar Area"><i
+                                                    class="far fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

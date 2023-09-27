@@ -35,9 +35,12 @@ class otra extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('Asignación de incidencias')
+            ->greeting('¡Hola!')
+            ->line('Recibió este email porque se le ha asignado para la solucion de una nueva incidencia en el sistema de 
+                    incidencias y eventos en activos de Perfect Body Medical Center.')
+            ->action('Ver incidencia', url('/'))
+            ->salutation('Saludos cordiales.');
     }
 
     /**

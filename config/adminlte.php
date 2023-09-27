@@ -314,26 +314,32 @@ return [
         
         ['header' => 'Configuracion'],
         [
-            'text' => 'Usuario',
+            
+            'text' => 'Usuarios',
             'url'  => 'usuarios',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'listar-usuarios'
         ],
         [
             'text' => 'Incidencia',
             'url'  => 'incidencias',
             'icon' => 'fab fa-fw fa-buffer',
+            'can' => 'listar-incidencias'
         ],
         
         [
             'text' => 'Equipos',
             'url'  => 'equipos',
             'icon' => 'fas fa-fw fa-tv',
+            'can' => 'listar-equipos'
         ],
         [
             'text' => 'Lista de Roles',
             'url'  => 'roles',
             'icon' => 'fas fa-fw fa-user-cog',
+            'can' => 'listar-roles'
         ],
+        
         
 
         [
@@ -343,29 +349,36 @@ return [
                 [
                     'text' => 'Proveedores',
                     'url'  => 'proveedores',
+                    'can' => 'listar-proveedores'
                 ],
                 [
                     'text'    => 'Cargos',
                     'url'     => 'cargos',
+                    'can' => 'listar-cargos'
                     
                 ],
                 [
                     'text' => 'Areas de trabajo',
                     'url'  => 'areas',
+                    'can' => 'listar-areas'
                 ],
                 [
                     'text' => 'Notificaciones',
                     'url'  => 'notificaciones',
+                    'can' => 'listar-notificaciones'
                 ],
                 [
                     'text' => 'Rondas de Seguridad',
                     'url'  => 'rondas',
+                    'can' => 'listar-rondas'
                 ],
                 
             ],
+            
         ],
         
     ],
+    
 
     /*
     |--------------------------------------------------------------------------

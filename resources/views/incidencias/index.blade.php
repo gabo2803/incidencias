@@ -3,9 +3,9 @@
 @section('content')
     <div class="container mt-2">
         <div class="row">
-            <div class="col-lg-12 margin-tb">                
+            <div class="col-lg-12 margin-tb">
                 <div class="float-right mt-2 mb-2">
-                    @can('incidencias-create')
+                    @can('crear-incidencias')
                         <a class="btn btn-success" href="{{ route('incidencias.create') }}"> Nueva incidencia</a>
                     @endcan
                 </div>
@@ -66,20 +66,20 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                                                 <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                                <a class="btn btn-sm btn-success"
-                                                    href="{{ route('incidencias.show', $incidencia->id) }}">Ver</a>
+                                                <a class="btn btn-sm btn-success "
+                                                    href="{{ route('incidencias.show', $incidencia->id) }}"title="Detalles de la incidencia"><i class="fa-solid fa-eye"></i></a>
 
                                                 <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                                                @can('incidencias-edit')
-                                                    <a class="btn btn-sm btn-info"
-                                                        href="{{ route('incidencias.edit', $incidencia->id) }}">Editar</a>
+                                                @can('editar-incidencias')
+                                                    <a class="btn btn-sm btn-info ml-1"
+                                                        href="{{ route('incidencias.edit', $incidencia->id) }}"title="Editar incidencia"><i class="fas fa-marker"></i></a>
                                                 @endcan
-                                                @can('incidencias-delete')
+                                                @can('eliminar-incidencias')
                                                     <form action="{{ route('incidencias.destroy', $incidencia->id) }}"
                                                         method="post">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                                        <button type="submit" class="btn btn-sm btn-danger ml-1"title="Eliminar incidencia"><i class="far fa-trash-alt"></i></button>
                                                     </form>
                                                 @endcan
                                             </div>

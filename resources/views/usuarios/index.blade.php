@@ -4,17 +4,15 @@
 
     <div class="container mt-2">
         <div class="row">
-            <div class="col-lg-12 margin-tb">             
+            <div class="col-lg-12 margin-tb">
                 <div class="float-right mt-2 mb-2">
-                    <a class="btn btn-success" href="{{ route('usuarios.create') }}"> Nuevo usuario</a>
+                    @can('crear-usuarios')
+                        <a class="btn btn-success" href="{{ route('usuarios.create') }}"> Nuevo usuario</a>
+                    @endcan
                 </div>
             </div>
         </div>
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-        @endif
+
         <div class="row">
             <div class="col">
                 <div class="card">
@@ -42,21 +40,21 @@
                                         <td>{{ $usuario->cargo->descripcion }}</td>
                                         <td>{{ $usuario->email }}</td>
                                         <td>{{ $usuario->rol }}</td>
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                                                <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
-                                                <a class="btn btn-sm btn-success"
-                                                    href="{{ URL::to('usuarios', $usuario->id) }}">Ver</a>
-
-                                                <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
-                                                <a class="btn btn-sm btn-info"
-                                                    href="{{ route('usuarios.edit', $usuario->id) }}">Editar</a>
-                                                    <a  class="btn btn-danger btn-sm eliminar_user"
-                                                    href="{{ route('usuarios.destroy',$usuario->id) }}"
-                                                    >Eliminar</a>
-
-                                            </div>
-                                        </th>
+                                        <td style="width: 12%">
+                                            <!-- show the nerd (uses the show method found at GET /nerds/{id} -->
+                                            <a class="btn btn-sm btn-success" href="{{ URL::to('usuarios', $usuario->id) }}"
+                                                title="Detalles de usuario"><i class="fa-solid fa-eye"></i></a>
+                                            <!-- edit this nerd (uses the edit method found at GET /nerds/{id}/edit -->
+                                            @can('editar-usuarios')
+                                                <a class="btn btn-sm btn-info" href="{{ route('usuarios.edit', $usuario->id) }}"
+                                                    title="Editar usuario"><i class="fas fa-marker"></i></a>
+                                            @endcan
+                                            @can('eliminar-usuarios')
+                                                <a class="btn btn-danger btn-sm eliminar"
+                                                    href="{{ route('usuarios.destroy', $usuario->id) }}"
+                                                    title="Eliminar usuario"><i class="far fa-trash-alt"></i></a>
+                                            @endcan
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -75,6 +73,7 @@
     <link rel="stylesheet" href="css/style.css">
 @stop
 @section('js')
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="js/script.js"></script>
+    <script src="https://kit.fontawesome.com/715ccab37c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/script.js"></script>
 @stop

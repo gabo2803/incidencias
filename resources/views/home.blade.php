@@ -1,7 +1,17 @@
 @extends('adminlte::page')
 
 @section('title', 'Home')
+@section('content_header')
+    <div class="row">
+        <div class="col-lg-12 margin-tb">
+            <div class="pull-left">
+                <h2>Bienvenid@ al modulo de incidencias  <small class="text-muted">{{ $usuario->primerNombre }} {{$usuario->primerApellido}}</small>
+                </h2>
+            </div>
 
+        </div>
+    </div>
+@stop
 
 @section('content')
 
@@ -112,116 +122,7 @@
                         </span>
                     </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header border-0">
-                    <h3 class="card-title">Products</h3>
-                    <div class="card-tools">
-                        <a href="#" class="btn btn-tool btn-sm">
-                            <i class="fas fa-download"></i>
-                        </a>
-                        <a href="#" class="btn btn-tool btn-sm">
-                            <i class="fas fa-bars"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-striped table-valign-middle">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Sales</th>
-                                <th>More</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/default-150x150.png" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Some Product
-                                </td>
-                                <td>$13 USD</td>
-                                <td>
-                                    <small class="text-success mr-1">
-                                        <i class="fas fa-arrow-up"></i>
-                                        12%
-                                    </small>
-                                    12,000 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/default-150x150.png" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Another Product
-                                </td>
-                                <td>$29 USD</td>
-                                <td>
-                                    <small class="text-warning mr-1">
-                                        <i class="fas fa-arrow-down"></i>
-                                        0.5%
-                                    </small>
-                                    123,234 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/default-150x150.png" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Amazing Product
-                                </td>
-                                <td>$1,230 USD</td>
-                                <td>
-                                    <small class="text-danger mr-1">
-                                        <i class="fas fa-arrow-down"></i>
-                                        3%
-                                    </small>
-                                    198 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="dist/img/default-150x150.png" alt="Product 1"
-                                        class="img-circle img-size-32 mr-2">
-                                    Perfect Item
-                                    <span class="badge bg-danger">NEW</span>
-                                </td>
-                                <td>$199 USD</td>
-                                <td>
-                                    <small class="text-success mr-1">
-                                        <i class="fas fa-arrow-up"></i>
-                                        63%
-                                    </small>
-                                    87 Sold
-                                </td>
-                                <td>
-                                    <a href="#" class="text-muted">
-                                        <i class="fas fa-search"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </div>           
 
         </div>
 
@@ -229,15 +130,15 @@
             <div class="card">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Sales</h3>
+                        <h3 class="card-title">Cantidad de incidencias por tipos</h3>
                         <a href="javascript:void(0);">View Report</a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="d-flex">
                         <p class="d-flex flex-column">
-                            <span class="text-bold text-lg">$18,230.00</span>
-                            <span>Sales Over Time</span>
+                           
+                            <span>Tipos de Eventos</span>
                         </p>
                         <p class="ml-auto d-flex flex-column text-right">
                             <span class="text-success">
@@ -256,7 +157,7 @@
                                 <div class=""></div>
                             </div>
                         </div>
-                        <canvas id="sales-chart" height="400" style="display: block; width: 329px; height: 200px;"
+                        <canvas id="graficaIncidencias" height="400" style="display: block; width: 329px; height: 200px;"
                             width="658" class="chartjs-render-monitor"></canvas>
                     </div>
                     <div class="d-flex flex-row justify-content-end">
@@ -268,79 +169,11 @@
                         </span>
                     </div>
                 </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header border-0">
-                    <h3 class="card-title">Online Store Overview</h3>
-                    <div class="card-tools">
-                        <a href="#" class="btn btn-sm btn-tool">
-                            <i class="fas fa-download"></i>
-                        </a>
-                        <a href="#" class="btn btn-sm btn-tool">
-                            <i class="fas fa-bars"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                        <p class="text-success text-xl">
-                            <i class="ion ion-ios-refresh-empty"></i>
-                        </p>
-                        <p class="d-flex flex-column text-right">
-                            <span class="font-weight-bold">
-                                <i class="ion ion-android-arrow-up text-success"></i> 12%
-                            </span>
-                            <span class="text-muted">CONVERSION RATE</span>
-                        </p>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center border-bottom mb-3">
-                        <p class="text-warning text-xl">
-                            <i class="ion ion-ios-cart-outline"></i>
-                        </p>
-                        <p class="d-flex flex-column text-right">
-                            <span class="font-weight-bold">
-                                <i class="ion ion-android-arrow-up text-warning"></i> 0.8%
-                            </span>
-                            <span class="text-muted">SALES RATE</span>
-                        </p>
-                    </div>
-
-                    <div class="d-flex justify-content-between align-items-center mb-0">
-                        <p class="text-danger text-xl">
-                            <i class="ion ion-ios-people-outline"></i>
-                        </p>
-                        <p class="d-flex flex-column text-right">
-                            <span class="font-weight-bold">
-                                <i class="ion ion-android-arrow-down text-danger"></i> 1%
-                            </span>
-                            <span class="text-muted">REGISTRATION RATE</span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
+            </div>           
         </div>
+    </div> 
 
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <canvas id="detallesIncidencias"></canvas>
-        </div>
-    </div>
 
-@section('content_header')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Bienvenid@ al modulo de incidencias <img src="logo.jpg" alt="">{{ $usuario->primerNombre }}
-                </h2>
-            </div>
-
-        </div>
-    </div>
-@stop
 
 
 @stop
@@ -366,6 +199,55 @@
                 data: Object.values(monthlySales),
                 backgroundColor: 'rgba(24,78,130)',
                 borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+            x: {
+                grid: {
+                    display: false
+                }
+            },
+            y: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+        }
+    });
+</script>
+<script>
+    var ctx = document.getElementById('graficaIncidencias').getContext('2d');
+    var data = @json($totalareas);
+
+    var labels = data.map(function(item) {
+        return item.area;
+    });
+
+    var values = data.map(function(item) {
+        return item.total;
+    });
+    var colors = [
+        'rgb(220, 53, 69)',
+        'rgb(40, 167, 69)',
+        'rgb(255, 193, 7)',
+        // Agrega más colores aquí
+    ];
+
+    // Crear un array de backgroundColors
+    var backgroundColors = colors.slice(0, values.length);
+
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Incidencias por Áreas',
+                data: values,
+                backgroundColor: backgroundColors,
+                borderColor: colors,
                 borderWidth: 1
             }]
         },

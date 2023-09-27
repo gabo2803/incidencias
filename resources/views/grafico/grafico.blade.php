@@ -1,10 +1,17 @@
 @extends('adminlte::page')
 @section('title', 'Graficos de rondas')
 @section('content')
-    <div class="container">        
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 margin-tb">
+                <div class="float-right m-2">
+                    <a class="btn btn-primary" href="{{ route('rondas.index') }}"> Atras</a>
+                </div>
+            </div>
+        </div>        
         <div class="row">
             <div class="col-lg-6">
-                <div class="card mt-5">
+                <div class="card ">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">Lista de Chequeo Seguridad del paciente</h3>                           
@@ -114,7 +121,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card mt-5">
+                <div class="card ">
                     <div class="card-header border-0">
                         <div class="d-flex justify-content-between">
                             <h3 class="card-title">la Lista de Chequeo Medicamento</h3>                           

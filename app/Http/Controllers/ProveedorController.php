@@ -10,10 +10,10 @@ class ProveedorController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:proveedores-list|equipo-create|equipo-edit|equipo-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:proveedores-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:proveedores-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:proveedores-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:listar-proveedores|crear-proveedores|editar-proveedores|eliminar-proveedores', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear-proveedores', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-proveedores', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-proveedores', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

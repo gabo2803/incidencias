@@ -11,10 +11,10 @@ class CargosController extends Controller
 {   
     function __construct()
     {
-        $this->middleware('permission:cargos-list|equipo-create|equipo-edit|equipo-delete', ['only' => ['index', 'store']]);
-        $this->middleware('permission:cargos-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:cargos-edit', ['only' => ['edit', 'update']]);
-        $this->middleware('permission:cargos-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:listar-cargos|crear-cargos|editar-cargos|eliminar-cargos', ['only' => ['index', 'store']]);
+        $this->middleware('permission:crear-cargos', ['only' => ['create', 'store']]);
+        $this->middleware('permission:editar-cargos', ['only' => ['edit', 'update']]);
+        $this->middleware('permission:eliminar-cargos', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

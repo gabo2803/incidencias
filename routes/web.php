@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('notificaciones',NotificacionesController::class);
     Route::resource('areas',AreasController::class);
     Route::resource('rondas',RondasController::class);
+   
 
     //archivos    
     Route::get('descargarArchivo/{id}',[ArchivoController::class,'descargarArchivo']);
@@ -56,7 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('eliminarArchivo/{id}',[ArchivoController::class,'eliminarArchivo'])->name('eliminar_archivo');
     
     //pdf
-    Route::get('generarPdf/{id}',[PDFController::class,'generarPdf']);
+    Route::get('generarPdf/{id}',[PDFController::class,'pdfEquipo']);
+    Route::get('generar_pdf_clasificado',[PDFController::class,'pdfCategoria']);
 
     //adicional de rondas   
     Route::get('graficos',[GraficoController::class,'generarGrafico']);
